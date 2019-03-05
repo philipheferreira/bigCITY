@@ -15,8 +15,16 @@ const iot = new Schema({
         type: Date,
         dafault: Date.now()
     },
-    temperature_sensor: Number,
-    humidity_sensor: Number,
+    sensor:{
+        temperature: Number,
+        humidity: Number,
+        noise_pollution: Number,
+        toxic_gases:{
+            co: Number,
+            smoke: Number,
+            lta: Number,
+        }
+    },
     current_wheater: {
         temperature: Number,
         wind_direction: String,
@@ -27,134 +35,14 @@ const iot = new Schema({
         icon: String,
         sensation_current: Number,
     },
-    predict_72h_wheater: [{
-        date: Date,
-        date_br: Date,
-        rain: {
-            precipitation: Number
-        },
-        wind: {
-            velocity: Number,
-            direction: String,
-            directiondegrees: Number,
-            gust: Number
-        },
-        temperature: {
-            temperature: Number
-        }
-    }],
-    predict_25d_wheater: {
-        meteogram: String,
-        predict: [{
-            date: Date,
-            date_br: Date,
-            humidity: {
-                min: Number,
-                max: Number,
-                dawn: {
-                    min: Number,
-                    max: Number
-                },
-                morning: {
-                    min: Number,
-                    max: Number
-                },
-                afternoon: {
-                    min: Number,
-                    max: Number
-                },
-                night: {
-                    min: Number,
-                    max: Number
-                }
-            }
-        }],
-        rain: {
-            probability: Number,
-            precipitation: Number
-        },
-        wind: {
-            velocity_min: Number,
-            velocity_max: Number,
-            velocity_avg: Number,
-            gust_max: Number,
-            direction_degrees: Number,
-            direction: String,
-            dawn: {
-                direction: String,
-                direction_degrees: Number,
-                gust_max: Number,
-                velocity_max: Number
-            },
-            morning: {
-                direction: String,
-                direction_degrees: Number,
-                gust_max: Number,
-                velocity_max: Number
-            },
-            afternoon: {
-                direction: String,
-                direction_degrees: Number,
-                gust_max: Number,
-                velocity_max: Number
-            },
-            night: {
-                direction: String,
-                direction_degrees: Number,
-                gust_max: Number,
-                velocity_max: Number
-            }
-        },
-        uv: {
-            max: Number
-        },
-        thermal_sensation: {
-            min: Number,
-            max: Number
-        },
-        text_icon: {
-            icon: {
-                dawn: String,
-                morning: String,
-                afternoon: String,
-                night: String,
-                day: String
-            },
-            text: {
-                pt: String,
-                en: String,
-                es: String,
-                phrase: {
-                    reduced: String,
-                    morning: String,
-                    afternoon: String,
-                    night: String,
-                    dawn: String
-                }
-            }
-        },
-        temperature: {
-            min: Number,
-            max: Number,
-            dawn: {
-                min: Number,
-                max: Number
-            },
-            morning: {
-                min: Number,
-                max: Number
-            },
-            afternoon: {
-                min: Number,
-                max: Number
-            },
-            night: {
-                min: Number,
-                max: Number
-            }
-        }
+    flowSegmentData: {
+        frc: String,
+        currentSpeed: Number,
+        freeFlowSpeed: Number,
+        currentTravelTime: Number,
+        freeFlowTravelTime: Number,
+        confidence: Number,
     }
-    //date: "2019-03-04 09:40:16"
 })
 
 // current
@@ -219,4 +107,4 @@ const iot = new Schema({
 
 mongoose.module('iot', iot);
 
-module.exports = iotSchema;
+module.exports = iot;
