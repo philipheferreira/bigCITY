@@ -1,4 +1,4 @@
-'use_strict'
+'use strict'
 
 const advisor_token = '5f7dd653e46e4ba331cffde3320bfca6'
 

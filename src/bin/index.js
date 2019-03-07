@@ -1,4 +1,4 @@
-'use_strict'
+'use strict'
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
@@ -13,7 +13,7 @@ app.use(bodyParser.json())
 
 const routers = require('../routes')
 const data = require('./constants')
-console.log(data)
+// console.log(data)
 
 app.use('/api/v1/ws/', routers)
 
