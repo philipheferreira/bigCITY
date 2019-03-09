@@ -4,8 +4,14 @@ exports.post = ('/', async (req, res, next) => {
     // recuperar dados 
     // tempo real
     try {
-        // const sensor = req.body.sensor
+        // TODO: get request
+        const sensor = req.body.sensor
+        // TODO: get request
         // const geolocation = req.body.geolocation
+        ///// TODO: remove 
+        const lat = '52.41072'
+        ///// TODO: remove
+        const log = '4.84239'
         const data = new Date()
         console.log(data)
         const wheater = await axios.get(constrants.current_weather)
@@ -13,10 +19,42 @@ exports.post = ('/', async (req, res, next) => {
         const state = wheater.data.state
         const country = wheater.data.country
         const current_weather = wheater.data.data
+        const flowData = await axios.get(constrants.flow_segment.replace(':LAT', lat).replace(':LOG', log))
+        const { frc,
+            currentSpeed,
+            freeFlowSpeed,
+            currentTravelTime,
+            freeFlowTravelTime,
+            confidence } = flowData.data.flowSegmentData
+            
+        const flowSegmentData = {
+            frc,
+            currentSpeed,
+            freeFlowSpeed,
+            currentTravelTime,
+            freeFlowTravelTime,
+            confidence
+        }
 
-        console.log(current_wheater.data.data)
+
+        const iot = {
+            state,
+            name,
+            country,
+            geolocation: {
+                lat,
+                log
+            },
+            data,
+            sensor,
+            current_weather,
+            flowSegmentData
+        }
+
+        console.log(iot)
+        res.json(iot)
     } catch (e) {
-        console.log({error: e})
+        console.log({ error: e })
         res.send({ error: e })
     }
     // sensor:{
@@ -42,5 +80,5 @@ exports.post = ('/', async (req, res, next) => {
     // }
     // requisições de trafego
     // salvar no banco
-    res.send({ ok: "ok" })
+    // res.send({ ok: "ok" })
 })

@@ -17,6 +17,6 @@ url.weather_forecast_15d = 'http://apiadvisor.climatempo.com.br/api/v1/forecast/
 
 url.route_a_b = `https://route.api.here.com/routing/7.2/calculateroute.json?waypoint0=52.5160%2C13.3779&waypoint1=52.5206,13.3862&mode=fastest%3Bcar%3Btraffic%3Aenabled&app_id=${here_token.api_id}&app_code=${here_token.api_code}`;
 
-url.flow_segment = `https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json?point=52.41072%2C4.84239&unit=KMPH&key=${tomtom_token}`
+url.flow_segment = `https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json?point=:LAT%2C:LOG&unit=KMPH&key=${tomtom_token}`//`https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json?point=52.41072%2C4.84239&unit=KMPH&key=${tomtom_token}`
 
 module.exports = url;

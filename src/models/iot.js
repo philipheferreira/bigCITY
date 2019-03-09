@@ -25,7 +25,7 @@ const iot = new Schema({
             lta: Number,
         }
     },
-    current_wheater: {
+    current_weather: {
         temperature: Number,
         wind_direction: String,
         wind_velocity: Number,
