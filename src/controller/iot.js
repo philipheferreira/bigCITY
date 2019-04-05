@@ -1,17 +1,25 @@
 const axios = require('axios')
 const constrants = require('./../bin/constants')
+const Iot = require('../models/iot')
 exports.post = ('/', async (req, res, next) => {
     // recuperar dados 
     // tempo real
     try {
-        // TODO: get request
-        const sensor = req.body.sensor
+        // TODO: get request modify
+        let sensor = req.body.sensor
+        sensor.noise_pollution = "";
+        sensor.toxic_gases = {
+            co: "",
+            smoke: "",
+            lta: "",
+        };
+        
         // TODO: get request
         // const geolocation = req.body.geolocation
         ///// TODO: remove 
-        const lat = '52.41072'
+        const lat = req.body.lat//'52.41072'
         ///// TODO: remove
-        const log = '4.84239'
+        const log = req.body.lon//'4.84239'
         const data = new Date()
         console.log(data)
         const wheater = await axios.get(constrants.current_weather)
@@ -25,6 +33,7 @@ exports.post = ('/', async (req, res, next) => {
             freeFlowSpeed,
             currentTravelTime,
             freeFlowTravelTime,
+               
             confidence } = flowData.data.flowSegmentData
             
         const flowSegmentData = {
@@ -37,7 +46,7 @@ exports.post = ('/', async (req, res, next) => {
         }
 
 
-        const iot = {
+        const iot = new Iot({
             state,
             name,
             country,
@@ -49,8 +58,13 @@ exports.post = ('/', async (req, res, next) => {
             sensor,
             current_weather,
             flowSegmentData
+        });
+        try{
+            iot.save()
+        }catch(e){
+            console.log({ error: e })
+            res.send({ error: e })
         }
-
         console.log(iot)
         res.json(iot)
     } catch (e) {
