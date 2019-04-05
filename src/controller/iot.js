@@ -60,7 +60,7 @@ exports.post = ('/', async (req, res, next) => {
             flowSegmentData
         });
         try{
-            iot.save()
+            await iot.save()
         }catch(e){
             console.log({ error: e })
             res.send({ error: e })
