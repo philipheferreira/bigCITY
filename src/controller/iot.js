@@ -4,6 +4,7 @@ const Iot = require('../models/iot')
 exports.post = ('/', async (req, res, next) => {
     // recuperar dados 
     // tempo real
+    let iot
     try {
         // TODO: get request modify
         let sensor = req.body.sensor
@@ -46,7 +47,7 @@ exports.post = ('/', async (req, res, next) => {
         }
 
 
-        const iot = new Iot({
+        iot = new Iot({
             state,
             name,
             country,
@@ -60,13 +61,20 @@ exports.post = ('/', async (req, res, next) => {
             flowSegmentData
         });
         
-            await iot.save()
-                console.log(iot)
-        res.json(iot)
-    } catch (e) {
+        
+        } catch (e) {
         console.log({ error: e })
         res.send({ error: e })
     }
+    try{
+            await iot.save()
+                console.log(iot)
+        res.send(iot)
+        }catch (e) {
+        console.log({ error: e })
+        res.send({ error: e })
+    }
+    
     // sensor:{
     //     temperature: Number,
     //     humidity: Number,
