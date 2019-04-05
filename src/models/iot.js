@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema()
+const Schema = mongoose.Schema
 
 
 
@@ -105,6 +105,6 @@ const iot = new Schema({
 //
 
 
-mongoose.module('iot', iot);
+mongoose.model('iot', iot);
 
 module.exports = iot;
