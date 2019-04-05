@@ -59,13 +59,9 @@ exports.post = ('/', async (req, res, next) => {
             current_weather,
             flowSegmentData
         });
-        try{
+        
             await iot.save()
-        }catch(e){
-            console.log({ error: e })
-            res.send({ error: e })
-        }
-        console.log(iot)
+                console.log(iot)
         res.json(iot)
     } catch (e) {
         console.log({ error: e })
